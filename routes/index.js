@@ -35,6 +35,11 @@ router.get('/checkOut/:id', function(req, res) {
     // res.status(404).send('Page not found!');
 });
 
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    res.redirect('/home')
+});
+
 ///* 404 Route Handler */
 //router.get('*', function(req, res) {
 //   res.send('error', '404: Page Not Found :(');

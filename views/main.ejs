@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>main</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+
+        <form name=f1 action="">
+            <fieldset>
+                <p></p>
+                <h1>Check In System</h1>
+
+                <div>
+                    <p><input placeholder="Student ID" value="" name="idnumber"></p>
+                    <button type="submit" class="btn btn-success fa fa-sign-in" onclick="f1.action='';return true;"></button>
+                    <button type="submit" class="btn btn-primary fa fa-calendar" onclick="f1.action='viewlog'; return true;"></button>
+
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</html>
