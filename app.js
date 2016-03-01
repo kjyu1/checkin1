@@ -9,6 +9,17 @@ var session = require('express-session');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+
+var myRoutes =[
+    ['/home', require('./routes/home')],
+    ['/viewlog', require('./routes/viewlog')],
+    ['/admin', require('./routes/admin')]
+];
+
+myRoutes.forEach(function (data) {
+    app.use(data[0], data[1]);
+});
+
 var app = express();
 app.use(session({ cookie: { maxAge: 60000 },
     secret: 'woot',
