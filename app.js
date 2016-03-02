@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+<<<<<<< HEAD
 // Initializing Mongoose and the connection
 var mongoose    = require('mongoose');
 mongoose.connect('mongodb://employee:employeered@ds019268.mlab.com:19268/employees_red_wedding');
@@ -52,6 +53,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var myRoutes =[
+    ['/home', require('./routes/home')],
+    ['/viewlog', require('./routes/viewlog')],
+    ['/admin', require('./routes/admin')]
+];
+
+myRoutes.forEach(function (data) {
+    app.use(data[0], data[1]);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
