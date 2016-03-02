@@ -7,7 +7,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('viewlog', { title: 'Express' });
+
+    res.render('viewlog');
+    //var id = req.body.idnumber;
+    //console.log('receive id: ' + id);
 });
 
 module.exports = router;
