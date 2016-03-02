@@ -5,7 +5,7 @@ var express = require('express'),
 /* GET home page */
 router.get('/', function(req, res, next) {
     // TODO: Render the home page template here
-    res.render('main', { title: 'Home Page' });
+    res.redirect('/home');
 });
 
 /* GET user check in */
