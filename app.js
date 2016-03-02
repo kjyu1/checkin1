@@ -7,20 +7,23 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
-
+// Array of routes to be used
 var myRoutes =[
-    ['/home', require('./routes/home')],
-    ['/viewlog', require('./routes/viewlog')],
-    ['/admin', require('./routes/admin')]
+    //['/home', require('./routes/home')],
+    //['/viewlog', require('./routes/viewlog')],
+    ['/admin', require('./routes/admin')],
+    ['/users', require('./routes/users')],
+    ['/', require('./routes/index')]
 ];
 
+var app = express();
+
+// Iterating the array and creating routes
 myRoutes.forEach(function (data) {
     app.use(data[0], data[1]);
 });
 
-var app = express();
 app.use(session({ cookie: { maxAge: 60000 },
     secret: 'woot',
     resave: false,
@@ -45,9 +48,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

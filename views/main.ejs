@@ -14,9 +14,9 @@
                 <h1>Check In System</h1>
 
                 <div>
-                    <p><input placeholder="Student ID" value="" name="idnumber"></p>
-                    <button type="submit" class="btn btn-success fa fa-sign-in" onclick="f1.action='';return true;"></button>
-                    <button type="submit" class="btn btn-primary fa fa-calendar" onclick="f1.action='viewlog'; return true;"></button>
+                    <p><input placeholder="Student ID" value="" name="idnumber" required></p>
+                    <button type="submit" class="btn btn-success fa fa-sign-in" onclick="f1.action='/userCheck';return true;"></button>
+                    <button type="submit" class="btn btn-primary fa fa-calendar" onclick="f1.action='/users/viewlog'; return true;"></button>
 
                 </div>
             </fieldset>
