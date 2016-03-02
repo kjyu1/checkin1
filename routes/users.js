@@ -7,12 +7,13 @@ var router = express.Router();
 //});
 
 /* GET user listings */
-router.get('/:id', function(req, res){
-    var id = req.params.id;
+router.get('/viewlog', function(req, res){
+    //var id = req.params.id;
+    var id = req.query.idnumber;
 
     // TODO: Determine if user exists and display their logs
-    console.log('User with ID ' + id + ' viewing their logs.');
-    res.send('Display log ejs template here!');
+    console.log('User with ID ' + id + ' is viewing their logs.');
+    res.render('viewlog', { title: 'Express' });
 });
 
 module.exports = router;
