@@ -3,12 +3,11 @@ var mongoose =  require('mongoose'),
 
 var employeeSchema = new Schema({
     id: String,
-    checkedIn: Boolean,
-    timeIn: String,
-    timeOut: String,
+    checkedIn: {type: Boolean, default: false},
     logs: [{
-        date: String,
-        duration: String
+        timeIn: {type: Number, default: Date.now},
+        timeOut: {type: Number, default: null},
+        duration: {type: Number, default: 0}
     }]
 });
 

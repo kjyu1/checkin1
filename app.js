@@ -8,7 +8,7 @@ var session = require('express-session');
 
 // Initializing Mongoose and the connection
 var mongoose    = require('mongoose');
-mongoose.connect('mongodb://localhost/employees');
+mongoose.connect('mongodb://employee:employeered@ds019268.mlab.com:19268/employees_red_wedding');
 
 var routes = require('./routes/index');
 
