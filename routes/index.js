@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page */
 router.get('/', function(req, res, next) {
     // TODO: Render the home page template here
-    res.render('index', { title: 'Home Page' });
+    res.redirect('/home');
 });
 
 /* GET user check in */
@@ -35,10 +35,6 @@ router.get('/checkOut/:id', function(req, res) {
     // res.status(404).send('Page not found!');
 });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.redirect('/home')
-});
 
 ///* 404 Route Handler */
 //router.get('*', function(req, res) {
