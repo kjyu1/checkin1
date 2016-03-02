@@ -27,7 +27,7 @@ function main(){
             success: function(response) {
                 console.log('id: '+idnumber);
                 console.log("Going to Viewlog page...");
-                window.location.href ='viewlog';
+                //window.location.href ='viewlog';
             }
         });
     })
