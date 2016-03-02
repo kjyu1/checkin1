@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+// Initializing Mongoose and the connection
+var mongoose    = require('mongoose');
+mongoose.connect('mongodb://localhost/employees');
+
 var routes = require('./routes/index');
 
 // Array of routes to be used
