@@ -6,19 +6,32 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+// Initializing Mongoose and the connection
+var mongoose    = require('mongoose');
+mongoose.connect('mongodb://employee:employeered@ds019268.mlab.com:19268/employees_red_wedding');
+
+var routes = require('./routes/index');
+
+// Array of routes to be used
+var myRoutes =[
+    //['/home', require('./routes/home')],
+    //['/viewlog', require('./routes/viewlog')],
+    ['/admin', require('./routes/admin')],
+    ['/users', require('./routes/users')],
+    ['/', require('./routes/index')]
+];
+
 var app = express();
+
+// Iterating through the array and creating routes
+myRoutes.forEach(function (data) {
+    app.use(data[0], data[1]);
+});
+
 app.use(session({ cookie: { maxAge: 60000 },
     secret: 'woot',
     resave: false,
     saveUninitialized: false}));
-
-
-// Using flash messages
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-    res.locals.messages = require('express-messages')(req, res);
-    next();
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
