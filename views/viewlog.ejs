@@ -7,37 +7,34 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel='stylesheet' href='/stylesheets/style.css' />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/ajax/mainscript.js"></script>
     </head>
     <body>
-        <h1>Hours</h1>
 
+        <h1>Employee: <%=employeeID%> <br><br> Work Hours<br><br></h1>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <td>Date</td>
-                    <td>Start Time</td>
-                    <td>End Time</td>
-                    <td>Duration</td>
+                    <td><strong>Date</strong></td>
+                    <td><strong>Start Time</strong></td>
+                    <td><strong>End Time</strong></td>
+                    <td><strong>Duration</strong></td>
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Dummy Date</td>
-                <td>0:00:00</td>
-                <td>1:00:11</td>
-                <td>1</td>
-            </tr>
 
-
-            <tr>
-                <td>Dummy Date</td>
-                <td>0:00:00</td>
-                <td>1:00:11</td>
-                <td>1</td>
-            </tr>
+                <% for(i=0;i<employeeInfo.length;i++) {%>
+                <tr>
+                    <td><%=employeeInfo[i].date%></td>
+                    <td><%=employeeInfo[i].starttime%></td>
+                    <td><%=employeeInfo[i].endtime%></td>
+                    <td><%=employeeInfo[i].duration%></td>
+                </tr>
+                <% } %>
             </tbody>
         </table>
 
-        <a href="/home"><button class="btn btn-primary" id="homepageBtn"><span class="fa fa-home"></span></button></a>
+        <a href="/"><button class="btn btn-primary"><span class="fa fa-home fa-2x"></span>  Home</button></a>
     </body>
 </html>
