@@ -18,7 +18,7 @@ router.get('/userCheck', function(req, res) {
     if (id === undefined || id === '') { // If a student ID was not entered
         var messages = {
             notification: 'Please return to the home page and input your student ID number.',
-            message: '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+            message: ''
         };
 
         res.render('notificationPage', messages);
@@ -46,9 +46,7 @@ router.get('/userCheck', function(req, res) {
                     console.log('Employee with id ' + id + ' logged in.');
                     var messages = {
                         notification: 'You have checked in.',
-                        message: 'Remember to check out when you leave!' +
-                        '<br /><br />' +
-                        '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+                        message: 'Remember to check out when you leave!'
                     };
                     res.render('notificationPage', messages);
                 });
@@ -56,6 +54,7 @@ router.get('/userCheck', function(req, res) {
                 if (docs.checkedIn) { // If the user is already checked in, check them out
                     // Adding the new data to the array
 
+                    //console.log('received this id: ' + id);
                     docs.logs[docs.logs.length - 1].timeOut = d.getTime();
                     docs.logs[docs.logs.length - 1].duration = d.getTime() - docs.logs[docs.logs.length - 1].timeIn;
 
@@ -73,9 +72,7 @@ router.get('/userCheck', function(req, res) {
                             console.log('Employee with id ' + id + ' checked out.');
                             var messages = {
                                 notification: 'You have checked out.',
-                                message: 'Have a great day!' +
-                                '<br /><br />' +
-                                '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+                                message: 'Have a great day!'
                             };
                             res.render('notificationPage', messages);
                         }
@@ -99,9 +96,7 @@ router.get('/userCheck', function(req, res) {
                             console.log('Employee with id ' + id + ' checked in.');
                             var messages = {
                                 notification: 'You have checked in.',
-                                message: 'Remember to check out when you leave!' +
-                                '<br /><br />' +
-                                '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+                                message: 'Remember to check out when you leave!'
                             };
                             res.render('notificationPage', messages);
                         }
