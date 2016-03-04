@@ -75,26 +75,6 @@ router.get('/userCheck', function(req, res) {
                     checkOut(docs, d, id, res);
 
 
-                    var hours = moment.duration(docs.logs[docs.logs.length - 1].duration).hours();
-                    var  minutes = moment.duration(docs.logs[docs.logs.length - 1].duration).minutes()%60;
-
-                    hours = (hours === 0) ? ' ' : hours + ' hour(s) ';
-
-                    employeeModel.update(
-                        {id: id},
-                        {$set: set},
-                        function(err, docs) {
-                            if (err) throw err;
-
-                            console.log('Employee with id ' + id + ' checked out.');
-                            var messages = {
-                                notification: 'You have checked out.',
-                                message: 'You have checked in for '+ hours + minutes+' minute(s). \n Have a great day!'
-                            };
-                            res.render('notificationPage', messages);
-                        }
-                    );
-
                 } else { // If the user is not checked in, check them in
                     docs.logs.push({
                         timeIn: d.getTime()
