@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+//var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -15,10 +15,10 @@ mongoose.connect('mongodb://employee:employeered@ds019268.mlab.com:19268/employe
 
 var app = express();
 
-app.use(session({ cookie: { maxAge: 60000 },
-    secret: 'woot',
-    resave: false,
-    saveUninitialized: false}));
+//app.use(session({ cookie: { maxAge: 60000 },
+//    secret: 'woot',
+//    resave: false,
+//    saveUninitialized: false}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
