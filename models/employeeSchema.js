@@ -1,6 +1,8 @@
 var mongoose =  require('mongoose'),
     Schema      = mongoose.Schema;
 
+mongoose.connect('mongodb://employee:employeered@ds019268.mlab.com:19268/employees_red_wedding');
+
 var employeeSchema = new Schema({
     id: String,
     checkedIn: {type: Boolean, default: false},
