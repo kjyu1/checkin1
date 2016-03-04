@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
         if(docs.length > 0){
             var info = [];
             for (var i = 0; i < docs[0].logs.length;i++) {
-                var start = moment(docs[0].logs[i].timeIn).format('hh:mm:ss a');
-                var end = moment(docs[0].logs[i].timeOut).format('hh:mm:ss a');
+                var start = moment(docs[0].logs[i].timeIn).format('hh:mm a');
+                var end = moment(docs[0].logs[i].timeOut).format('hh:mm a');
                 var hours = moment.duration(docs[0].logs[i].duration).hours();
                 var  minutes = moment.duration(docs[0].logs[i].duration).minutes()%60;
                 var date = moment(docs[0].logs[i].timeIn).format('l');
