@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    router = express.Router(),
+    employeeModel = require('../models/employeeSchema');
 
 /* GET home page */
 router.get('/', function(req, res, next) {
@@ -10,73 +11,100 @@ router.get('/', function(req, res, next) {
 /* GET user check in */
 router.get('/userCheck', function(req, res) {
     //var id = req.params.id;
-    var id = req.query.idnumber;
+    var id  = req.query.idnumber;
+    var d   = new Date();
 
     // Checks if a student ID was entered
-    if (id === undefined || id === '') {
+    if (id === undefined || id === '') { // If a student ID was not entered
         var messages = {
             notification: 'Please return to the home page and input your student ID number.',
-            message: '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+            message: ''
         };
 
         res.render('notificationPage', messages);
+    } else { // If a student ID was entered
+        // TODO: Determine if user exists, determine if they are checking in or out
+        employeeModel.findOne({id: id}, function(err, docs) {
+            if (err) throw err;
+
+            if (!docs) { // If the user does not exist, create a new entry and check them in
+                var logs = {
+                    timeIn: d.getTime(),
+                    timeOut: undefined,
+                    duration: undefined
+                };
+                var newEmployee = new employeeModel({
+                    id: id,
+                    checkedIn: true,
+                    logs: logs
+                });
+
+                newEmployee.save(function(err, docs) {
+                    if (err) throw err;
+
+                    console.log('New employee with id ' + id + ' created.');
+                    console.log('Employee with id ' + id + ' logged in.');
+                    var messages = {
+                        notification: 'You have checked in.',
+                        message: 'Remember to check out when you leave!'
+                    };
+                    res.render('notificationPage', messages);
+                });
+            } else { // If the user exists, determine their current status and take appropriate actions
+                if (docs.checkedIn) { // If the user is already checked in, check them out
+                    // Adding the new data to the array
+
+                    //console.log('received this id: ' + id);
+                    docs.logs[docs.logs.length - 1].timeOut = d.getTime();
+                    docs.logs[docs.logs.length - 1].duration = d.getTime() - docs.logs[docs.logs.length - 1].timeIn;
+
+                    var set = {
+                        checkedIn: false,
+                        logs: docs.logs
+                    };
+
+                    employeeModel.update(
+                        {id: id},
+                        {$set: set},
+                        function(err, docs) {
+                            if (err) throw err;
+
+                            console.log('Employee with id ' + id + ' checked out.');
+                            var messages = {
+                                notification: 'You have checked out.',
+                                message: 'Have a great day!'
+                            };
+                            res.render('notificationPage', messages);
+                        }
+                    );
+                } else { // If the user is not checked in, check them in
+                    docs.logs.push({
+                        timeIn: d.getTime()
+                    });
+
+                    var set = {
+                        checkedIn: true,
+                        logs: docs.logs
+                    };
+
+                    employeeModel.update(
+                        {id: id},
+                        {$set: set},
+                        function(err, docs) {
+                            if (err) throw err;
+
+                            console.log('Employee with id ' + id + ' checked in.');
+                            var messages = {
+                                notification: 'You have checked in.',
+                                message: 'Remember to check out when you leave!'
+                            };
+                            res.render('notificationPage', messages);
+                        }
+                    );
+                }
+            }
+        });
     }
-
-    // TODO: Determine if user exists, determine if they are checking in or out
-    if (true) {
-        if (true) { // TODO: Check the user in
-
-            console.log('User with ID ' + id + ' checked in.');
-        } else { // TODO Check the user out
-
-            console.log('User with ID ' + id + ' checked out.');
-        }
-    } else { // TODO: If a user does not exist, create a new database entry for them and check them in
-
-    }
-
-    // TODO: Redirect user back to home page with a checked in message
-    // TODO: Close the session after some specified amount of time?
-    //req.flash('info', 'You have checked in!');
-    //res.redirect('/');
-    var messages = {
-        notification: 'You have checked in.',
-        message: 'Remember to check out when you leave!'
-    };
-    res.render('notificationPage', messages);
 });
-
-///* GET user check out */
-//router.get('/checkOut', function(req, res) {
-//    //var id = req.params.id;
-//    var id = req.query.idnumber;
-//
-//
-//    // TODO: Determine if user exists and check them out
-//    console.log('User with ID ' + id + ' checked out.');
-//
-//    // TODO: Redirect user back to home page with a checked out message, displaying the duration of their session
-//    // TODO: Close the session?
-//    //req.flash('info', 'You have checked out!');
-//    //res.redirect('/');
-//    var messages = {
-//        notification: 'You have checked out.',
-//        message: 'Have a great day!'
-//    };
-//    res.render('notificationPage', messages);
-//
-//    // TODO: Below is the 404 status code
-//    // res.status(404).send('Page not found!');
-//});
-
-///* GET home page. */
-//router.get('/', function(req, res, next) {
-//    res.redirect('/home')
-//});
-
-///* 404 Route Handler */
-//router.get('*', function(req, res) {
-//   res.send('error', '404: Page Not Found :(');
-//});
 
 module.exports = router;
