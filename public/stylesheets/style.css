@@ -17,7 +17,8 @@ a {
 button{
     width: auto;
     min-width: 300px;
-    height: 40px;
+    /*height: 40px;*/
+    min-height: 80px;
     margin: 25px;
     display: block;
     font-size: 1.1em;
