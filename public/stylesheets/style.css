@@ -1,5 +1,9 @@
 body {
-    background-color: #47B6FF;
+    /*background-color: #47B6FF;*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/images/background.jpe');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     text-align: center;
     align-content: center;
     padding: 50px;
@@ -41,4 +45,17 @@ input{
 h1{
     text-shadow: -1px -1px 1px #000;
     color: #FFF;
+}
+
+thead {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #999999;
+}
+
+div.notificationPage {
+    color: #ffffff;
 }
