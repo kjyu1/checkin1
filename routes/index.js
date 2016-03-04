@@ -2,8 +2,6 @@ var express = require('express'),
     router = express.Router(),
     employeeModel = require('../models/employeeSchema');
 
-
-
 /* GET home page */
 router.get('/', function(req, res, next) {
     // TODO: Render the home page template here
@@ -20,13 +18,14 @@ router.get('/userCheck', function(req, res) {
     if (id === undefined || id === '') { // If a student ID was not entered
         var messages = {
             notification: 'Please return to the home page and input your student ID number.',
-            message: '<a href="/"><button class="btn btn-primary"><span class="fa fa-home fa-2x"></span></button></a>'
+            message: ''
         };
 
         res.render('notificationPage', messages);
     } else { // If a student ID was entered
         // TODO: Determine if user exists, determine if they are checking in or out
         employeeModel.findOne({id: id}, function(err, docs) {
+            if (err) throw err;
 
             if (!docs) { // If the user does not exist, create a new entry and check them in
                 var logs = {

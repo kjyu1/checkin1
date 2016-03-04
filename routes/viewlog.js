@@ -50,8 +50,6 @@ router.get('/', function(req, res, next) {
             res.render('notificationPage', messages);
         }
     });
-
-
 });
 
 module.exports = router;
