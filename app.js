@@ -13,7 +13,6 @@ var users = require('./routes/users');
 var mongoose    = require('mongoose');
 mongoose.connect('mongodb://employee:employeered@ds019268.mlab.com:19268/employees_red_wedding');
 
-
 var app = express();
 
 app.use(session({ cookie: { maxAge: 60000 },

@@ -51,8 +51,9 @@ router.get('/userCheck', function(req, res) {
                     res.render('notificationPage', messages);
                 });
             } else { // If the user exists, determine their current status and take appropriate actions
-                if (docs.checkedIn) {// If the user is already checked in, check them out
+                if (docs.checkedIn) { // If the user is already checked in, check them out
                     // Adding the new data to the array
+
                     //console.log('received this id: ' + id);
                     docs.logs[docs.logs.length - 1].timeOut = d.getTime();
                     docs.logs[docs.logs.length - 1].duration = d.getTime() - docs.logs[docs.logs.length - 1].timeIn;
