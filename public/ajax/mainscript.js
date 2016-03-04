@@ -23,14 +23,5 @@ function main(){
             e.preventDefault();
         }
     });
-
-    $('button#userCheck').on('click',
-        function(){
-            function pageRedirect() {
-                window.location.href = "/home";
-            }
-            console.log('Redirecting to home in 5 secs...');
-            setTimeout(pageRedirect(), 5000);
-        });
 }
 $(document).ready(main);

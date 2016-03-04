@@ -73,9 +73,7 @@ router.get('/userCheck', function(req, res) {
                             console.log('Employee with id ' + id + ' checked out.');
                             var messages = {
                                 notification: 'You have checked out.',
-                                message: 'Have a great day!' +
-                                '<br /><br />' +
-                                '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+                                message: 'Have a great day!'
                             };
                             res.render('notificationPage', messages);
                         }
@@ -99,9 +97,7 @@ router.get('/userCheck', function(req, res) {
                             console.log('Employee with id ' + id + ' checked in.');
                             var messages = {
                                 notification: 'You have checked in.',
-                                message: 'Remember to check out when you leave!' +
-                                '<br /><br />' +
-                                '<a href="/"><button class="btn btn-primary"><span class="fa fa-home"></span></button></a>'
+                                message: 'Remember to check out when you leave!'
                             };
                             res.render('notificationPage', messages);
                         }
