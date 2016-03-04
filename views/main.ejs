@@ -11,23 +11,17 @@
 
     <body>
         <form name=f1 action="">
-            <p id="message"></p>
             <h1>Check In System</h1>
 
             <div>
-                <p><input name="idnumber" id="idnumber" placeholder="Student ID" value=""></p>
-                <button type="submit" class="btn btn-success fa fa-sign-in" onclick="f1.action='userCheck';return true;"></button>
-                <button type="submit" class="btn btn-primary fa fa-calendar" onclick="f1.action='viewlog'; return true;"></button>
-
+                <p><input class="input-lg" name="idnumber" id="idnumber" placeholder="Student ID" value="" required></p>
+                <button type="submit" id="userCheck" class="btn btn-success" onclick="f1.action='userCheck';return true;">
+                    <span class="fa fa-sign-in fa-2x">  Sign In/Out</span>
+                </button>
+                <button type="submit" class="btn btn-warning" onclick="f1.action='viewlog'; return true;">
+                    <span class="fa fa-calendar fa-2x">  View Log</span>
+                </button>
             </div>
         </form>
-
-
-        <!--<h1>Check In System</h1>-->
-        <!--<div>-->
-            <!--<p><input id="idnumber" placeholder="Student ID" value=""></p>-->
-            <!--<button class="btn btn-success fa fa-sign-in" id="loginBtn"></button>-->
-            <!--<button class="btn btn-primary fa fa-calendar" id="viewlogBtn"></button>-->
-        <!--</div>-->
     </body>
 </html>

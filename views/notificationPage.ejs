@@ -10,6 +10,14 @@
     <div class="container">
         <h2><%= notification %></h2>
         <p><em><%- message %></em></p>
+        <br><br>
+        <a href="/"><button class="btn btn-warning"><span class="fa fa-home fa-2x">  Home</span></button></a>
     </div>
+
+    <script>
+        setTimeout(function() {
+            window.location.replace('/');
+        }, 5000)
+    </script>
 </body>
 </html>
