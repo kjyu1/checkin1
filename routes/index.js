@@ -8,6 +8,22 @@ router.get('/', function(req, res, next) {
     res.redirect('/home');
 });
 
+
+/* logout all login'd people*/
+router.get('/logoutAll', function(req, res) {
+    employeeModel.find({checkedIn: true}, function(err, docs) {
+        var d = new Date();
+        for(var i = 0; i < docs.length; i++) {
+            checkOut(docs[i],d,docs[i].id,res);
+            //doc[i]
+            //res.render('/userCheck', { doc: docs[i]} )
+        }
+        //res.redirect('/home');
+    });
+    res.redirect('/home');
+});
+
+
 /* GET user check in */
 router.get('/userCheck', function(req, res) {
     //var id = req.params.id;
@@ -54,29 +70,33 @@ router.get('/userCheck', function(req, res) {
                 if (docs.checkedIn) { // If the user is already checked in, check them out
                     // Adding the new data to the array
 
-                    //console.log('received this id: ' + id);
-                    docs.logs[docs.logs.length - 1].timeOut = d.getTime();
-                    docs.logs[docs.logs.length - 1].duration = d.getTime() - docs.logs[docs.logs.length - 1].timeIn;
 
-                    var set = {
-                        checkedIn: false,
-                        logs: docs.logs
-                    };
+                    checkOut(docs, d, id, res);
 
-                    employeeModel.update(
-                        {id: id},
-                        {$set: set},
-                        function(err, docs) {
-                            if (err) throw err;
 
-                            console.log('Employee with id ' + id + ' checked out.');
-                            var messages = {
-                                notification: 'You have checked out.',
-                                message: 'Have a great day!'
-                            };
-                            res.render('notificationPage', messages);
-                        }
-                    );
+                    ////console.log('received this id: ' + id);
+                    //docs.logs[docs.logs.length - 1].timeOut = d.getTime();
+                    //docs.logs[docs.logs.length - 1].duration = d.getTime() - docs.logs[docs.logs.length - 1].timeIn;
+                    //
+                    //var set = {
+                    //    checkedIn: false,
+                    //    logs: docs.logs
+                    //};
+                    //
+                    //employeeModel.update(
+                    //    {id: id},
+                    //    {$set: set},
+                    //    function(err, docs) {
+                    //        if (err) throw err;
+                    //
+                    //        console.log('Employee with id ' + id + ' checked out.');
+                    //        var messages = {
+                    //            notification: 'You have checked out.',
+                    //            message: 'Have a great day!'
+                    //        };
+                    //        res.render('notificationPage', messages);
+                    //    }
+                    //);
                 } else { // If the user is not checked in, check them in
                     docs.logs.push({
                         timeIn: d.getTime()
@@ -106,5 +126,31 @@ router.get('/userCheck', function(req, res) {
         });
     }
 });
+
+var checkOut = function (docs, d, id, res) {
+    docs.logs[docs.logs.length - 1].timeOut = d.getTime();
+    docs.logs[docs.logs.length - 1].duration = d.getTime() - docs.logs[docs.logs.length - 1].timeIn;
+
+    var set = {
+        checkedIn: false,
+        logs: docs.logs
+    };
+
+    employeeModel.update(
+        {id: id},
+        {$set: set},
+        function(err, docs) {
+            if (err) throw err;
+
+            console.log('Employee with id ' + id + ' checked out.');
+            var messages = {
+                notification: 'You have checked out.',
+                message: 'Have a great day!'
+            };
+            res.render('notificationPage', messages);
+        }
+    );
+};
+
 
 module.exports = router;
