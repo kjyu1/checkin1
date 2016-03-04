@@ -6,7 +6,6 @@ body {
     background-attachment: fixed;
     text-align: center;
     align-content: center;
-    padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -16,7 +15,7 @@ a {
 
 button{
     width: auto;
-    min-width: 300px;
+    min-width: 250px;
     /*height: 40px;*/
     min-height: 80px;
     margin: 25px;
